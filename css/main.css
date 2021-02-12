@@ -1,0 +1,50 @@
+.navbar-brand {
+	font-size: 1.5em;
+}
+.navbar-light {
+	background-color: #F2EFFB;
+}
+html {
+	background-color: #FFF;
+}
+.note {
+	text-align: center;
+	height: 80px;
+	background: -webkit-linear-gradient(left, #1c92d2, #1c92d2);
+	color: #fff;
+	font-weight: bold;
+	line-height: 80px;
+	opacity: 90%;
+}
+.form-content {
+	padding: 5%;
+	border: 1px solid #1c92d2;
+	margin-bottom: 2%;
+}
+.form-control {
+	border-radius: 1.5rem;
+	resize: none;
+}
+.btnSubmit {
+	border: none;
+	border-radius: 1.5rem;
+	padding: 1%;
+	width: 20%;
+	cursor: pointer;
+	background: #1c92d2;
+	color: #fff;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+	opacity: 90%;
+}
+.note:first-child {
+	font-size: 1.5em;
+}
+.btn-block {
+	background: #1c92d2;
+	opacity: 90%;
+}
+.btn-primary {
+	background: #1c92d2;
+}
