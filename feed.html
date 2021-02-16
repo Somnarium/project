@@ -5,7 +5,12 @@
 	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- Bootstrap CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
+	
 	<title>smthng like Twitter</title>
+
+	<!-- Имитация данных -->
+	<script type="text/javascript" src="_tasks/frontend-1/posts.js"></script>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top mb-5">
@@ -26,7 +31,7 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<div class="panel panel-default widget">
+					<div class="panel panel-default widget w-100">
 						<div class="panel-heading">
 							<span class="glyphicon glyphicon-comment"></span>
 							<div class="form-group">
@@ -38,69 +43,58 @@
 							<h3 class="panel-title">Recent posts</h3>
 						</div>
 						<div class="panel-body">
+
 							<ul class="list-group">
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-xs-10 col-md-11">
-											<div>
-												<h5>Username</h5>
-												<div class="mic-info"></div>
-											</div>
-											<div class="comment-text mb-3">
-												Random comment for any strings
-											</div>
-											<div class="action">
-												<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-xs-10 col-md-11">
-											<div>
-												<h5>Username</h5>
-												<div class="mic-info"></div>
-											</div>
-											<div class="comment-text mb-3">
-												Random comment for any stringsRandom comment for any stringsRandom comment for any stringsRandom comment for any strings
-											</div>
-											<div class="action">
-												<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-xs-10 col-md-11">
-											<div>
-												<h5>Username</h5>
-												<div class="mic-info mb-1"></div>
-											</div>
-											<div class="comment-text mb-3">
-												Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any stringsRandom comment for any stringsRandom comment for any stringsRandom comment for any stringsRandom comment for any strings
-											</div>
-											<div class="action">
-												<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul><a class="btn btn-primary btn-sm btn-block" href="#" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+								<!-- тут динамически выводятся посты -->
+							</ul>
+
+							<!-- <a class="btn btn-primary btn-sm btn-block" href="#" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>-->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/a7b922bccc.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			// Перебираем все посты
+			posts.forEach(function(post) {
+
+				// Здесь post - каждый элемент из массива post на своей итерации
+				console.log(post);
+
+				// Этот разметка одного поста
+				listItem = 
+				'<li class="list-group-item">' +
+					'<div class="row">' +
+						'<div class="col-xs-10 col-md-11">' +
+							'<div>' +
+								'<h5>' + post.author + '</h5>' +
+								'<div class="mic-info"></div>' +
+							'</div>' +
+							'<div class="comment-text mb-3">' +
+								'Random comment for any strings' +
+							'</div>' +
+							'<div class="action">' +
+								'<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>'
+							'</div>' +
+						'</div>' +
+					'</div>' +
+				'</li>';
+
+				// Добавляем пост на страницу
+				$('.list-group').append(listItem);
+
+			});
+
+		});
 	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
-	</script>
-	<script src="https://kit.fontawesome.com/a7b922bccc.js">
-	</script>
+
 </body>
 </html>
