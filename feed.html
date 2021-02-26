@@ -5,7 +5,10 @@
 	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><!-- Bootstrap CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
-	<title>smthng like Twitter</title>
+	<title>smthng like Twitter</title><!-- Имитация данных -->
+
+	<script src="_tasks/frontend-1/posts.js" type="text/javascript">
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top mb-5">
@@ -26,7 +29,7 @@
 			</div>
 			<div class="container">
 				<div class="row">
-					<div class="panel panel-default widget">
+					<div class="panel panel-default widget w-100">
 						<div class="panel-heading">
 							<span class="glyphicon glyphicon-comment"></span>
 							<div class="form-group">
@@ -39,68 +42,75 @@
 						</div>
 						<div class="panel-body">
 							<ul class="list-group">
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-xs-10 col-md-11">
-											<div>
-												<h5>Username</h5>
-												<div class="mic-info"></div>
-											</div>
-											<div class="comment-text mb-3">
-												Random comment for any strings
-											</div>
-											<div class="action">
-												<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-xs-10 col-md-11">
-											<div>
-												<h5>Username</h5>
-												<div class="mic-info"></div>
-											</div>
-											<div class="comment-text mb-3">
-												Random comment for any stringsRandom comment for any stringsRandom comment for any stringsRandom comment for any strings
-											</div>
-											<div class="action">
-												<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-xs-10 col-md-11">
-											<div>
-												<h5>Username</h5>
-												<div class="mic-info mb-1"></div>
-											</div>
-											<div class="comment-text mb-3">
-												Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any strings Random comment for any stringsRandom comment for any stringsRandom comment for any stringsRandom comment for any stringsRandom comment for any strings
-											</div>
-											<div class="action">
-												<i class="far fa-heart"></i> <span class="counter">n</span> <i class="far fa-comments ml-3"></i> <span class="counter">n</span>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul><a class="btn btn-primary btn-sm btn-block" href="#" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+								<!-- тут динамически выводятся посты -->
+							</ul><!-- <a class="btn btn-primary btn-sm btn-block" href="#" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>-->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
-	</script>
-	<script src="https://kit.fontawesome.com/a7b922bccc.js">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/a7b922bccc.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	 posts.sort(function(a, b) {
+		 return new Date(b.date) - new Date(a.date);
+	 });
+
+	 function generatePostMarkup(a, indexPost, comments) {
+		 return ('<li class="list-group-item">' + '<div class="row">' + '<div class="col-xs-10 col-md-11">' + '<div>' + '<h5>' + a.author + '</h5>' + '<div class="mic-info"></div>' + '</div>' + '<div class="comment-text mb-3">' + a.message + '</div>' + '<div class="action">' + '<i class="far fa-heart"></i> <span class="counter">' + a.likes + '</span> <i class="far fa-comments ml-3" id="comments_' + indexPost + '"></i> <span class="counter">' + a.comments.length + '</span>' + ' ' + a.date + '</div>' + '</div>' + '<div class="col-xs-10 col-md-11" id="comments_' + indexPost + '_block" style="display: none;">' + comments + '<div>' + '<textarea class="form-control mt-3 mb-3" id="newcomments_' + indexPost + '_textarea" placeholder="Write your comment here" rows="1"></textarea>' + '</div>' + '<div>' + '<button class="buttonForComments" type="button" id="newcomments_' + indexPost + '">Submit</button>' + '</div></div> </div>' + '</div>' + '</li>')
+	 };
+	 // Перебираем все посты
+	 posts.forEach(function(post, indexPost) {
+		 // Здесь post - каждый элемент из массива post на своей итерации
+		 console.log(post);
+		 var comments = '';
+		 post.comments.sort(function(a, b) {
+			 return new Date(b.date) - new Date(a.date);
+		 });
+		 // перебираем комменты
+		 post.comments.forEach(function(comment, indexComment) {
+			 comments += '<div class="commentBlock" id="postNumber_' + indexPost + '">' + comment.author + '-' + comment.message + comment.date + '</div>';
+		 });
+		 // Добавляем пост на страницу
+		 $('.list-group').append(generatePostMarkup(post, indexPost, comments));
+	 });
+	 var now = new Date();
+	 // функция для добавления 0 к датам.
+	 var nowMonthNumber = now.getMonth() + 1;
+	 var nowDayNumber = now.getDate();
+	 var nowHourNumber = now.getHours();
+	 var nowMinuteNumber = now.getMinutes();
+	 var nowSecondNumber = now.getSeconds();
+
+	 function appendZero(a) {
+		 return (('0' + (a)).slice(-2));
+	 };
+	 // Добавляем новый пост на страницу
+	 $('.btnSubmit').on('click', function() {
+		 var newPost = {
+			 'author': 'Username',
+			 'message': $('textarea').val(),
+			 'date': now.getFullYear() + '-' + appendZero(nowMonthNumber) + '-' + appendZero(nowDayNumber) + ' ' + appendZero(nowHourNumber) + ':' + appendZero(nowMinuteNumber) + ':' + appendZero(nowSecondNumber),
+			 'likes': 0,
+			 'comments': []
+		 };
+		 console.log(newPost);
+		 $('.list-group').prepend(generatePostMarkup(newPost, 2, ''));
+	 });
+	 $('.action').on('click', '.fa-comments', function() {
+		 $('#' + this.id + '_block').toggle();
+		 console.log('test');
+	 });
+	 $('.buttonForComments').on('click', function() {
+		 var newComment = '<div>' + 'Username' + '-' + $('#' + this.id + '_textarea').val() + now.getFullYear() + '-' + appendZero(nowMonthNumber) + '-' + appendZero(nowDayNumber) + ' ' + appendZero(nowHourNumber) + ':' + appendZero(nowMinuteNumber) + ':' + appendZero(nowSecondNumber) + '</div>';;
+		 $('#' + 'comments_' + this.id.replace('newcomments_', '') + '_block').prepend(newComment);
+		 console.log();
+	 });
+	});
 	</script>
 </body>
 </html>
